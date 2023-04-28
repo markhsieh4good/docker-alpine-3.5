@@ -4,6 +4,7 @@ image: docker:latest
 
 variables:
   DOCKER_DRIVER: overlay2
+  COMMAND: $INPUT
 
 services:
   - docker:dind
@@ -30,6 +31,23 @@ build-image:
     refs:
     - master
     - main
+    # variables:
+    #   - $CI_COMMIT_MESSAGE =~ /demo/
+  when: manual
+
+dev-test:
+  stage: build
+  tags:
+    - builder
+  script:
+    - echo "we got $COMMAND"
+    - eval "$COMMAND"
+  except:
+    - master
+    - main
+  only:
+    refs:
+    - dev
     # variables:
     #   - $CI_COMMIT_MESSAGE =~ /demo/
   when: manual
