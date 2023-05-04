@@ -19,4 +19,4 @@ COPY utility_namespace_dns.sh .
 RUN chmod +x ./utility_namespace_dns.sh
 RUN ./utility_namespace_dns.sh
 
-mkdir -p /etc/logrotate.d
+RUN mkdir -p /etc/logrotate.d
